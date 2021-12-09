@@ -25,4 +25,24 @@ public @interface FieldsValidate {
      * */
     boolean isNull() default false;
 
+    /**
+     * 是否启用非空字符串校验，默认为false，仅当字段类型为{@link String}时起作用
+     * */
+    boolean isNotBlank() default false;
+
+    /**
+     * 是否启用空字符串校验，默认为false，仅当字段类型为{@link String}时起作用
+     * */
+    boolean isBlank() default false;
+
+    /**
+     * 是否启用非空集合校验，默认为false，仅当字段类型为{@link java.util.Collection}时起作用
+     * */
+    boolean isNotEmpty() default false;
+
+    /**
+     * 是否启用空集合校验，默认为false，仅当字段类型为{@link java.util.Collection}时起作用
+     * */
+    boolean isEmpty() default false;
+
 }
