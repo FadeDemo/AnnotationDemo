@@ -32,7 +32,7 @@ public class FieldValidateAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(FieldValidateAspect.class);
 
-    @Pointcut("@annotation(org.fade.demo.annotationdemo.fieldvalidateannotation.version1.annotation.FieldsValidate)")
+    @Pointcut("@within(org.fade.demo.annotationdemo.fieldvalidateannotation.version1.annotation.FieldsValidate)")
     public void pointcut(){}
 
     @Before("pointcut()")
