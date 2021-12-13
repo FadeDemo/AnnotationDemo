@@ -1,0 +1,65 @@
+package org.fade.demo.annotationdemo.fieldvalidateannotation.version2.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * <p>当方法的参数大于1时， {@link #index()} 为必填，
+ * {@link #name()} 可以选择不填，但是此时会丢失参数原本的名字信息</p>
+ * <p>当校验方法参数的字段时， {@link #isField()} 必须设置为true，
+ * 且 {@link #name()} 为必填</p>
+ * @author fade
+ * @date 2021/12/13
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface FieldValidate {
+
+    /**
+     * 待校验的参数名或字段名
+     * */
+    String name();
+
+    /**
+     * 待校验的参数声明位置或带校验的字段所属参数的声明位置
+     * */
+    int index() default 0;
+
+    /**
+     * 是否是参数的字段
+     * */
+    boolean isField() default false;
+
+    /**
+     * 是否开启非空校验
+     * */
+    boolean isNotNull() default false;
+
+    /**
+     * 是否开启空校验
+     * */
+    boolean isNull() default false;
+
+    /**
+     * 是否开启非空字符串校验
+     * */
+    boolean isNotBlank() default false;
+
+    /**
+     * 是否开启空字符串校验
+     * */
+    boolean isBlank() default false;
+
+    /**
+     * 是否开启非空集合校验
+     * */
+    boolean isNotEmpty() default false;
+
+    /**
+     * 是否开启空集合校验
+     * */
+    boolean isEmpty() default false;
+
+}
