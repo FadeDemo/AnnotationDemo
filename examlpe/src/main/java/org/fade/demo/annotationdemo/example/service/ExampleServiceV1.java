@@ -6,7 +6,8 @@ package org.fade.demo.annotationdemo.example.service;
  * @author fade
  * @date 2021/12/09
  */
-public interface ExampleService {
+@Deprecated
+public interface ExampleServiceV1 {
 
     /**
      * 测试校验字符串

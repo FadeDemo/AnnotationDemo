@@ -1,13 +1,9 @@
 package org.fade.demo.annotationdemo.example.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.fade.demo.annotationdemo.example.entity.Example;
-import org.fade.demo.annotationdemo.example.service.ExampleService;
+import org.fade.demo.annotationdemo.example.service.ExampleServiceV1;
 import org.fade.demo.annotationdemo.fieldvalidateannotation.version1.annotation.FieldsValidate;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * 例子Service实现类
@@ -17,7 +13,8 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class ExampleServiceImpl implements ExampleService {
+@Deprecated
+public class ExampleServiceV1Impl implements ExampleServiceV1 {
 
     @Override
     public void testString(@FieldsValidate(isNull = true) String arg1, @FieldsValidate(isNotNull = true) String arg2, @FieldsValidate(isBlank = true) String arg3, @FieldsValidate(isNotBlank = true) String arg4) {

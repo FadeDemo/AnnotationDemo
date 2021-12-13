@@ -1,6 +1,6 @@
 package org.fade.demo.annotationdemo.example.controller;
 
-import org.fade.demo.annotationdemo.example.service.ExampleService;
+import org.fade.demo.annotationdemo.example.service.ExampleServiceV1;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,12 @@ import javax.annotation.Resource;
  * @date 2021/12/09
  */
 @RestController
-@RequestMapping("/example")
-public class ExampleController {
+@RequestMapping("/exampleV1")
+@Deprecated
+public class ExampleControllerV1 {
 
-    @Resource(name = "exampleServiceImpl")
-    private ExampleService exampleService;
+    @Resource(name = "exampleServiceV1Impl")
+    private ExampleServiceV1 exampleServiceV1;
 
     @PostMapping("/save")
     public ResponseEntity<String> save() {
