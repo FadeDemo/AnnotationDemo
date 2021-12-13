@@ -62,7 +62,7 @@ public class FieldValidateAspect {
                         if (fieldsValidate.isNull() && ObjectUtil.isNotNull(arg)) {
                             throw new RuntimeException(parameterName + "必须为空");
                         }
-                        // fixme 如果arg为空，则arg不是CharSequence的实例
+                        // fixme 如果arg为空，则arg不是CharSequence的实例，那么此判断将不会执行
                         // 如果是CharSequence类型，开启了非空校验，但参数值为空，则抛出异常
                         if (arg instanceof CharSequence && fieldsValidate.isNotBlank() &&
                                 StrUtil.isBlank((CharSequence) arg)) {
