@@ -32,7 +32,7 @@ public class FieldValidateAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(FieldValidateAspect.class);
 
-    @Pointcut("@within(org.fade.demo.annotationdemo.fieldvalidateannotation.version1.annotation.FieldsValidate)")
+    @Pointcut("execution(* org.fade.demo.annotationdemo.example..*(..))")
     public void pointcut(){}
 
     @Before("pointcut()")
@@ -62,31 +62,37 @@ public class FieldValidateAspect {
                         if (fieldsValidate.isNull() && ObjectUtil.isNotNull(arg)) {
                             throw new RuntimeException(parameterName + "必须为空");
                         }
+                        // fixme 如果arg为空，则arg不是CharSequence的实例
                         // 如果是CharSequence类型，开启了非空校验，但参数值为空，则抛出异常
                         if (arg instanceof CharSequence && fieldsValidate.isNotBlank() &&
                                 StrUtil.isBlank((CharSequence) arg)) {
                             throw new RuntimeException(parameterName + "不能为空");
                         }
+                        // fixme
                         // 如果是CharSequence类型，开启了空校验，但参数值为非空，则抛出异常
                         if (arg instanceof CharSequence && fieldsValidate.isBlank() &&
                                 StrUtil.isNotBlank((CharSequence) arg)) {
                             throw new RuntimeException(parameterName + "必须为空");
                         }
+                        // fixme
                         // 如果是集合类型，开启了非空校验，但参数值为空，则抛出异常
                         if (arg instanceof Collection && fieldsValidate.isNotEmpty() &&
                                 CollectionUtil.isEmpty((Collection<?>) arg)) {
                             throw new RuntimeException(parameterName + "不能为空");
                         }
+                        // fixme
                         // 如果是集合类型，开启了空校验，但参数值为非空，则抛出异常
                         if (arg instanceof Collection && fieldsValidate.isEmpty() &&
                                 CollectionUtil.isNotEmpty((Collection<?>) arg)) {
                             throw new RuntimeException(parameterName + "必须为空");
                         }
+                        // fixme
                         // 如果是Map类型，开启了非空校验，但参数值为空，则抛出异常
                         if (arg instanceof Map && fieldsValidate.isNotEmpty() &&
                                 CollectionUtil.isEmpty((Map<?, ?>) arg)) {
                             throw new RuntimeException(parameterName + "不能为空");
                         }
+                        // fixme
                         // 如果是Map类型，开启了空校验，但参数值为非空，则抛出异常
                         if (arg instanceof Map && fieldsValidate.isEmpty() &&
                                 CollectionUtil.isNotEmpty((Map<?, ?>) arg)) {
@@ -118,31 +124,37 @@ public class FieldValidateAspect {
                                 if (fieldValidate.isNull() && ObjectUtil.isNotNull(o)) {
                                     throw new RuntimeException(value + "必须为空");
                                 }
+                                // fixme
                                 // 如果是CharSequence类型，开启了非空校验，但参数值为空，则抛出异常
                                 if (o instanceof CharSequence && fieldValidate.isNotBlank() &&
                                         StrUtil.isBlank((CharSequence) o)) {
                                     throw new RuntimeException(value + "不能为空");
                                 }
+                                // fixme
                                 // 如果是CharSequence类型，开启了空校验，但参数值为非空，则抛出异常
                                 if (o instanceof CharSequence && fieldValidate.isBlank() &&
                                         StrUtil.isNotBlank((CharSequence) o)) {
                                     throw new RuntimeException(value + "必须为空");
                                 }
+                                // fixme
                                 // 如果是集合类型，开启了非空校验，但参数值为空，则抛出异常
                                 if (o instanceof Collection && fieldValidate.isNotEmpty() &&
                                         CollectionUtil.isEmpty((Collection<?>) o)) {
                                     throw new RuntimeException(value + "不能为空");
                                 }
+                                // fixme
                                 // 如果是集合类型，开启了空校验，但参数值为非空，则抛出异常
                                 if (o instanceof Collection && fieldValidate.isEmpty() &&
                                         CollectionUtil.isNotEmpty((Collection<?>) o)) {
                                     throw new RuntimeException(value + "必须为空");
                                 }
+                                // fixme
                                 // 如果是Map类型，开启了非空校验，但参数值为空，则抛出异常
                                 if (o instanceof Map && fieldValidate.isNotEmpty() &&
                                         CollectionUtil.isEmpty((Map<?, ?>) o)) {
                                     throw new RuntimeException(value + "不能为空");
                                 }
+                                // fixme
                                 // 如果是Map类型，开启了空校验，但参数值为非空，则抛出异常
                                 if (o instanceof Map && fieldValidate.isEmpty() &&
                                         CollectionUtil.isNotEmpty((Map<?, ?>) o)) {

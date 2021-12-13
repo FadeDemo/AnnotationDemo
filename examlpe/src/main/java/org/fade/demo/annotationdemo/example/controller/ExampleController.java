@@ -23,9 +23,15 @@ public class ExampleController {
 
     @PostMapping("/save")
     public ResponseEntity<String> save() {
-        // 传空值
-        // fixme 拦截不生效
-        exampleService.save(null, null, null, null);
+        // 校验字符串
+        // 为空校验
+//        exampleService.testString("", null, null, null);
+        // 非空校验
+//        exampleService.testString(null, null, null, null);
+        // 空字符串校验
+//        exampleService.testString(null, "", "test", null);
+        // 非空字符串校验
+//        exampleService.testString(null, "", "", "");
         return ResponseEntity.ok("保存成功");
     }
 

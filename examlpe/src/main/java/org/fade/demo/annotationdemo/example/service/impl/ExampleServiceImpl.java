@@ -20,8 +20,8 @@ import java.util.Map;
 public class ExampleServiceImpl implements ExampleService {
 
     @Override
-    public void save(@FieldsValidate(isNotNull = true) Example example, String str, Collection<?> collection, Map<?, ?> map) {
-        log.info("执行保存操作");
+    public void testString(@FieldsValidate(isNull = true) String arg1, @FieldsValidate(isNotNull = true) String arg2, @FieldsValidate(isBlank = true) String arg3, @FieldsValidate(isNotBlank = true) String arg4) {
+        log.info("字符串校验成功");
     }
 
 }
