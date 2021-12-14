@@ -1,12 +1,20 @@
 package org.fade.demo.annotationdemo.fieldvalidateannotation.version2.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.fade.demo.annotationdemo.fieldvalidateannotation.version2.annotation.FieldValidate;
+import org.fade.demo.annotationdemo.fieldvalidateannotation.version2.annotation.FieldsValidate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fade
@@ -14,6 +22,11 @@ import org.springframework.core.Ordered;
  */
 @Aspect
 public class FieldValidateAspect implements Ordered {
+
+    /**
+     * 反射抛出的异常信息
+     * */
+    private static final String REFLECT_ERROR = "反射获取数据发生异常";
 
     private static final Logger LOG = LoggerFactory.getLogger(FieldValidateAspect.class);
 
@@ -26,7 +39,17 @@ public class FieldValidateAspect implements Ordered {
     @Before("annotationPointcut()")
     public void validate(JoinPoint joinPoint) {
         LOG.debug("校验开始");
-
+        Signature signature = joinPoint.getSignature();
+        if (signature instanceof MethodSignature) {
+            MethodSignature methodSignature = (MethodSignature) signature;
+            Method method = methodSignature.getMethod();
+            FieldsValidate fieldsValidate = method.getAnnotation(FieldsValidate.class);
+            FieldValidate fieldValidate = method.getAnnotation(FieldValidate.class);
+            // 最后的校验都是通过FieldValidate实现的
+            List<FieldValidate> fieldValidates = new ArrayList<>(16);
+        } else {
+            throw new RuntimeException(REFLECT_ERROR);
+        }
         LOG.debug("校验结束");
     }
 

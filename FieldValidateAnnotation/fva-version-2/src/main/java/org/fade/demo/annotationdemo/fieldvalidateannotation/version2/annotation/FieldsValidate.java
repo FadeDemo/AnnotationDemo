@@ -16,6 +16,6 @@ public @interface FieldsValidate {
     /**
      * {@link FieldValidate} 的列表
      * */
-    FieldValidate[] value();
+    FieldValidate[] value() default {};
 
 }

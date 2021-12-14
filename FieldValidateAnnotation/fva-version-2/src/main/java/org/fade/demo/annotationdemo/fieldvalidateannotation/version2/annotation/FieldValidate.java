@@ -6,6 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * <p>单独使用时适用于只校验一个参数或一个参数的一个字段的情况，当需要校验
+ * 多个参数或参数的多个字段时，需与 {@link FieldsValidate} 搭配使用</p>
  * <p>当方法的参数大于1时， {@link #index()} 为必填，
  * {@link #name()} 可以选择不填，但是此时会丢失参数原本的名字信息</p>
  * <p>当校验方法参数的字段时， {@link #isField()} 必须设置为true，
