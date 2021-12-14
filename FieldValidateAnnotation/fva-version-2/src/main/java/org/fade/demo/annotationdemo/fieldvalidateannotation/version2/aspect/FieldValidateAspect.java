@@ -1,5 +1,7 @@
 package org.fade.demo.annotationdemo.fieldvalidateannotation.version2.aspect;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,6 +16,7 @@ import org.springframework.core.Ordered;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,6 +50,18 @@ public class FieldValidateAspect implements Ordered {
             FieldValidate fieldValidate = method.getAnnotation(FieldValidate.class);
             // 最后的校验都是通过FieldValidate实现的
             List<FieldValidate> fieldValidates = new ArrayList<>(16);
+            if (ObjectUtil.isNotNull(fieldsValidate)) {
+                fieldValidates.addAll(Arrays.asList(fieldsValidate.value()));
+            }
+            if (ObjectUtil.isNotNull(fieldsValidate)) {
+                fieldValidates.add(fieldValidate);
+            }
+            if (CollectionUtil.isNotEmpty(fieldValidates)) {
+                fieldValidates.stream().forEach(x -> {
+                    // 校验的真正逻辑
+                    
+                });
+            }
         } else {
             throw new RuntimeException(REFLECT_ERROR);
         }
