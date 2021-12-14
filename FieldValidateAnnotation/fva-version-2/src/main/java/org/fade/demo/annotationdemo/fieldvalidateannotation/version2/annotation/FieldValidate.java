@@ -20,7 +20,7 @@ public @interface FieldValidate {
     /**
      * 待校验的参数名或字段名
      * */
-    String name();
+    String name() default "";
 
     /**
      * 待校验的参数声明位置或带校验的字段所属参数的声明位置

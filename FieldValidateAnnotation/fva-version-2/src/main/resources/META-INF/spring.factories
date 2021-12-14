@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.fade.demo.annotationdemo\
+  .fieldvalidateannotation.version2.config.FieldValidateAutoConfiguration

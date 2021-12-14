@@ -30,6 +30,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.fade.demo</groupId>
+            <artifactId>fva-version-2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
