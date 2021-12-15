@@ -35,32 +35,32 @@ public @interface FieldValidate {
     boolean isField() default false;
 
     /**
-     * 是否开启非空校验
+     * 是否开启不为null的校验
      * */
     boolean isNotNull() default false;
 
     /**
-     * 是否开启空校验
+     * 是否开启为null的校验
      * */
     boolean isNull() default false;
 
     /**
-     * 是否开启非空字符串校验
+     * 是否开启不为blank的校验
      * */
     boolean isNotBlank() default false;
 
     /**
-     * 是否开启空字符串校验
+     * 是否开启为blank的校验
      * */
     boolean isBlank() default false;
 
     /**
-     * 是否开启非空集合校验
+     * 是否开启不为empty的校验
      * */
     boolean isNotEmpty() default false;
 
     /**
-     * 是否开启空集合校验
+     * 是否开启为empty的校验
      * */
     boolean isEmpty() default false;
 

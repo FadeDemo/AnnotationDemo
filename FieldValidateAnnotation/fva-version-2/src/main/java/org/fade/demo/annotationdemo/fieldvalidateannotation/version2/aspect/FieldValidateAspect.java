@@ -43,7 +43,7 @@ public class FieldValidateAspect implements Ordered {
     }
 
     @Before("annotationPointcut()")
-    public void validate(JoinPoint joinPoint) {
+    public void doValidate(JoinPoint joinPoint) {
         LOG.debug("校验开始");
         Signature signature = joinPoint.getSignature();
         if (signature instanceof MethodSignature) {
