@@ -1,6 +1,7 @@
 package org.fade.demo.annotationdemo.fieldvalidateannotation.version2.aspect;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -14,7 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,10 +60,36 @@ public class FieldValidateAspect implements Ordered {
                 fieldValidates.add(fieldValidate);
             }
             if (CollectionUtil.isNotEmpty(fieldValidates)) {
-                fieldValidates.stream().forEach(x -> {
+                Parameter[] parameters = method.getParameters();
+                Object[] args = joinPoint.getArgs();
+                for (int i = 0; i < fieldValidates.size(); i++) {
+                    FieldValidate x = fieldValidates.get(i);
                     // 校验的真正逻辑
-                    
-                });
+                    Object val;
+                    // 是否是参数
+                    boolean isField = x.isField();
+                    // 待校验的参数或带校验字段所属参数的位置
+                    int index = x.index();
+                    Assert.checkBetween(index, 0, args.length - 1);
+                    // 参数值
+                    Object arg = args[index];
+                    if (isField) {
+                        Assert.notNull(arg);
+                        Parameter parameter = parameters[index];
+                        Class<?> type = parameter.getType();
+                        String name = x.name();
+                        Assert.notBlank(name);
+                        try {
+                            Field field = type.getDeclaredField(name);
+                            val = field.get(arg);
+                        } catch (NoSuchFieldException | IllegalAccessException e) {
+                            throw new RuntimeException(REFLECT_ERROR);
+                        }
+                    } else {
+                        val = arg;
+                    }
+
+                }
             }
         } else {
             throw new RuntimeException(REFLECT_ERROR);
