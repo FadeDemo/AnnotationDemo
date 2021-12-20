@@ -80,7 +80,7 @@ public class FieldValidateAspect implements Ordered {
             if (ObjectUtil.isNotNull(fieldsValidate)) {
                 fieldValidates.addAll(Arrays.asList(fieldsValidate.value()));
             }
-            if (ObjectUtil.isNotNull(fieldsValidate)) {
+            if (ObjectUtil.isNotNull(fieldValidate)) {
                 fieldValidates.add(fieldValidate);
             }
             if (CollectionUtil.isNotEmpty(fieldValidates)) {
@@ -151,15 +151,16 @@ public class FieldValidateAspect implements Ordered {
         }
         if (StrUtil.isNotBlank(msg)) {
             String clause;
+            String canonicalName = parameter.getType().getCanonicalName();
             if (isField) {
-                clause = String.format(PARAMETER_FIELD_ERROR, parameter.getType().toString(),
+                clause = String.format(PARAMETER_FIELD_ERROR, canonicalName,
                         index,
                         parameter.getName(),
                         x.name(),
                         msg);
             } else {
                 String parameterName = (StrUtil.isNotBlank(x.name())) ? x.name() : parameter.getName();
-                clause = String.format(PARAMETER_ERROR, parameter.getType().toString(),
+                clause = String.format(PARAMETER_ERROR, canonicalName,
                         index,
                         parameterName,
                         msg);

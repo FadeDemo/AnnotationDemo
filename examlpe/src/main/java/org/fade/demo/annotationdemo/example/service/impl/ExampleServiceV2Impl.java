@@ -21,4 +21,16 @@ public class ExampleServiceV2Impl implements ExampleServiceV2 {
         LOG.info("切面工作正常");
     }
 
+    @Override
+    @FieldValidate(isNotNull = true)
+    public void testValidateParameterIsNotNull(Object arg) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldValidate(isNull = true)
+    public void testValidateParameterIsNull(Object arg) {
+        LOG.info("校验通过");
+    }
+
 }

@@ -11,4 +11,16 @@ public interface ExampleServiceV2 {
      * */
     void testPointCutNormal();
 
+    /**
+     * 测试参数是否不为null
+     * @param arg 待校验的参数
+     * */
+    void testValidateParameterIsNotNull(Object arg);
+
+    /**
+     * 测试参数是否为null
+     * @param arg 待校验的参数
+     * */
+    void testValidateParameterIsNull(Object arg);
+
 }
