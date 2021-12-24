@@ -1,5 +1,6 @@
 package org.fade.demo.annotationdemo.example.controller;
 
+import org.fade.demo.annotationdemo.example.entity.Example;
 import org.fade.demo.annotationdemo.example.service.ExampleServiceV2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -114,6 +115,76 @@ public class ExampleControllerV2 {
         // 校验通过
         exampleService.testValidateStringParameterIsEmpty(null);
         exampleService.testValidateStringParameterIsEmpty("");
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testValidateStringParameterIsNotBlank")
+    public ResponseEntity<String> testValidateStringParameterIsNotBlank() {
+        // 校验不通过
+//        exampleService.testValidateStringParameterIsNotBlank(null);
+//        exampleService.testValidateStringParameterIsNotBlank("");
+//        exampleService.testValidateStringParameterIsNotBlank(" \t");
+        // 校验通过
+        exampleService.testValidateStringParameterIsNotBlank("test");
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testValidateNotFirstParameter")
+    public ResponseEntity<String> testValidateNotFirstParameter() {
+        // 校验不通过
+//        exampleService.testValidateNotFirstParameter(null, "\t");
+        // 校验通过
+        exampleService.testValidateNotFirstParameter(null, "test");
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testValidateAllParameters")
+    public ResponseEntity<String> testValidateAllParameters() {
+        // 校验不通过
+//        exampleService.testValidateAllParameters(null, null, null);
+//        exampleService.testValidateAllParameters(1, null, null);
+//        exampleService.testValidateAllParameters(1, Map.of(1, "test"), null);
+        // 校验通过
+        exampleService.testValidateAllParameters(1, Map.of(1, "test"), "test");
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testValidateParameterFields")
+    public ResponseEntity<String> testValidateParameterFields() {
+        Example example = new Example();
+        // 校验不通过
+//        exampleService.testValidateParameterFields(example);
+        example.setId(1L);
+//        exampleService.testValidateParameterFields(example);
+        example.setName("test");
+//        exampleService.testValidateParameterFields(example);
+        example.setList(List.of("test"));
+//        exampleService.testValidateParameterFields(example);
+        // 校验通过
+        example.setMap(Map.of("1", "test"));
+        exampleService.testValidateParameterFields(example);
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testValidateParameterAndField")
+    public ResponseEntity<String> testValidateParameterAndField() {
+        // 校验不通过
+        Example example = new Example();
+//        exampleService.testValidateParameterAndField(example, null);
+        example.setId(1L);
+//        exampleService.testValidateParameterAndField(example, null);
+        // 校验通过
+        exampleService.testValidateParameterAndField(example, 1);
+        return ResponseEntity.ok("操作成功");
+    }
+
+    @PostMapping("/testFieldsValidateAndFieldValidate")
+    public ResponseEntity<String> testFieldsValidateAndFieldValidate() {
+        // 校验不通过
+//        exampleService.testFieldsValidateAndFieldValidate(null, null);
+//        exampleService.testFieldsValidateAndFieldValidate(1, null);
+        // 校验通过
+        exampleService.testFieldsValidateAndFieldValidate(1, 1);
         return ResponseEntity.ok("操作成功");
     }
 

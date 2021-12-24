@@ -1,7 +1,9 @@
 package org.fade.demo.annotationdemo.example.service.impl;
 
+import org.fade.demo.annotationdemo.example.entity.Example;
 import org.fade.demo.annotationdemo.example.service.ExampleServiceV2;
 import org.fade.demo.annotationdemo.fieldvalidateannotation.version2.annotation.FieldValidate;
+import org.fade.demo.annotationdemo.fieldvalidateannotation.version2.annotation.FieldsValidate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,57 @@ public class ExampleServiceV2Impl implements ExampleServiceV2 {
     @Override
     @FieldValidate(isEmpty = true)
     public void testValidateStringParameterIsEmpty(String arg) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldValidate(isNotBlank = true)
+    public void testValidateStringParameterIsNotBlank(String arg) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldValidate(index = 1, isNotBlank = true)
+    public void testValidateNotFirstParameter(Object arg1, String arg2) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldsValidate({
+            @FieldValidate(isNotNull = true),
+            @FieldValidate(isNotEmpty = true, index = 1),
+            @FieldValidate(isNotBlank = true, index = 2)
+    })
+    public void testValidateAllParameters(Object arg1, Map<?, ?> arg2, String arg3) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldsValidate({
+            @FieldValidate(name = "id", isField = true, isNotNull = true),
+            @FieldValidate(name = "name", isField = true, isNotBlank = true),
+            @FieldValidate(name = "list", isField = true, isNotEmpty = true),
+            @FieldValidate(name = "map", isField = true, isNotEmpty = true)
+    })
+    public void testValidateParameterFields(Example arg) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldsValidate({
+            @FieldValidate(isField = true, name = "id", isNotNull = true),
+            @FieldValidate(index = 1, isNotNull = true)
+    })
+    public void testValidateParameterAndField(Example arg1, Object arg2) {
+        LOG.info("校验通过");
+    }
+
+    @Override
+    @FieldsValidate({
+            @FieldValidate(isNotNull = true)
+    })
+    @FieldValidate(index = 1, isNotNull = true)
+    public void testFieldsValidateAndFieldValidate(Object arg1, Object arg2) {
         LOG.info("校验通过");
     }
 

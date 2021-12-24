@@ -104,6 +104,7 @@ public class FieldValidateAspect implements Ordered {
                         Assert.notBlank(name);
                         try {
                             Field field = type.getDeclaredField(name);
+                            field.setAccessible(true);
                             val = field.get(arg);
                         } catch (NoSuchFieldException | IllegalAccessException e) {
                             throw new RuntimeException(REFLECT_ERROR);
