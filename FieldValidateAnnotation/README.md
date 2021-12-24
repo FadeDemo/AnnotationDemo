@@ -45,7 +45,7 @@ if (arg instanceof CharSequence && fieldsValidate.isNotBlank() &&
 
 * [Difference between Bridge pattern and Adapter pattern](https://stackoverflow.com/questions/1425171/difference-between-bridge-pattern-and-adapter-pattern)
 
-###### 与 [version-1](version-1) 的对比
+###### 与 [version-1](#version-1) 的对比
 
 * 参考了swagger的 `@ApiImplicitParams` 和`@ApiImplicitParam` 的注解进行设计
 * 参考spring-webmvc的 `DispatcherServlet` 的适配器模式设计不同类型参数的校验逻辑
