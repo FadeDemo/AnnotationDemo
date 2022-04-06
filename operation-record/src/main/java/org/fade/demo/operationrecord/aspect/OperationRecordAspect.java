@@ -12,6 +12,7 @@ import org.fade.demo.operationrecord.expression.OperationRecordEvaluationContext
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.lang.reflect.Method;
@@ -47,7 +48,7 @@ public class OperationRecordAspect {
                     String content = annotation.content();
                     long bizId = annotation.bizId();
                     ExpressionParser parser = new SpelExpressionParser();
-                    Expression expression = parser.parseExpression(content);
+                    Expression expression = parser.parseExpression(content, new TemplateParserContext());
                     OperationRecordEvaluationContext context = new OperationRecordEvaluationContext(null, method, proceedingJoinPoint.getArgs(), new DefaultParameterNameDiscoverer());
                     Object value = expression.getValue(context);
                     System.out.println(value);

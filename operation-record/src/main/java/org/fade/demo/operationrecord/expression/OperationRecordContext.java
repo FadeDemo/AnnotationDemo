@@ -47,6 +47,7 @@ public class OperationRecordContext {
      * <p>获取Spring EL将要使用的变量</p>
      * */
     public static Map<String, Object> getVariables() {
+        // fixme 出栈顺序导致覆盖异常
         Stack<Map<String, Object>> stack = VALUE_MAP_STACK.get();
         Map<String, Object> variables = new HashMap<>(16);
         while (CollectionUtil.isNotEmpty(stack)) {

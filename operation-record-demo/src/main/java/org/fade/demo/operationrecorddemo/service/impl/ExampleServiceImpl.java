@@ -15,9 +15,15 @@ import org.springframework.stereotype.Service;
 public class ExampleServiceImpl implements ExampleService {
 
     @Override
-    @OperationRecordAnnotation(content = "'test #a'", operator = "", bizId = 0L)
+    @OperationRecordAnnotation(content = "test: #{#a}#{#b}", operator = "", bizId = 0L)
     public void add() {
         OperationRecordContext.putVariable("a", "Hello World");
+        OperationRecordContext.putVariable("b", "!");
+        nestInvokeInService();
+    }
+
+    public void nestInvokeInService() {
+        OperationRecordContext.putVariable("a", "Nest invoke will rewrite variable");
     }
 
 }
