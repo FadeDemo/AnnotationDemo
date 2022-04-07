@@ -13,4 +13,10 @@ public interface ExampleService {
      * */
     void add();
 
+    /**
+     * <p>更新</p>
+     * @param arg 参数
+     * */
+    void update(int arg);
+
 }

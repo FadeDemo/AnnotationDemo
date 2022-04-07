@@ -47,16 +47,13 @@ public class OperationRecordContext {
      * <p>获取Spring EL将要使用的变量</p>
      * */
     public static Map<String, Object> getVariables() {
-        // fixme 出栈顺序导致覆盖异常
         Stack<Map<String, Object>> stack = VALUE_MAP_STACK.get();
         Map<String, Object> variables = new HashMap<>(16);
-        while (CollectionUtil.isNotEmpty(stack)) {
-            Map<String, Object> peek = stack.peek();
-            if (CollectionUtil.isEmpty(peek)) {
-                return variables;
+        if (CollectionUtil.isNotEmpty(stack)) {
+            for (int i = stack.lastIndexOf(Map.of()) + 1; i < stack.size();) {
+                Map<String, Object> remove = stack.remove(i);
+                variables.putAll(remove);
             }
-            variables.putAll(peek);
-            stack.pop();
         }
         return variables;
     }
@@ -67,7 +64,9 @@ public class OperationRecordContext {
     public static void clear() {
         Stack<Map<String, Object>> stack = VALUE_MAP_STACK.get();
         if (CollectionUtil.isNotEmpty(stack)) {
-            stack.removeAll(stack.subList(stack.lastIndexOf(Map.of()), stack.size()));
+            for (int i = stack.lastIndexOf(Map.of()); i < stack.size();) {
+                stack.remove(i);
+            }
         }
         if (CollectionUtil.isEmpty(stack)) {
             VALUE_MAP_STACK.remove();

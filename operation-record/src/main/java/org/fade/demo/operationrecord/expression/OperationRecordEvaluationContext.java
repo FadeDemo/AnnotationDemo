@@ -19,6 +19,7 @@ public class OperationRecordEvaluationContext extends MethodBasedEvaluationConte
         super(rootObject, method, arguments, parameterNameDiscoverer);
         Map<String, Object> variables = OperationRecordContext.getVariables();
         Optional.ofNullable(variables).ifPresent(x -> x.forEach(this::setVariable));
+        Optional.ofNullable(parameterNameDiscoverer).ifPresent(x -> lazyLoadArguments());
     }
 
 }

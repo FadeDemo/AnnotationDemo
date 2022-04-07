@@ -16,4 +16,9 @@ public class ExampleServiceTest {
         exampleService.add();
     }
 
+    @Test
+    public void testUpdate() {
+        exampleService.update(1);
+    }
+
 }
